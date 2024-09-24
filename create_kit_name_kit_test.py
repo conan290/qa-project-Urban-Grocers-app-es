@@ -2,11 +2,15 @@ import pytest
 from data import *
 from sender_stand_request import get_new_user_token, post_new_client_kit
 
+
 def positive_assert(kit_body):
     auth_token = get_new_user_token()
     response = post_new_client_kit(kit_body, auth_token)
+    print(f"Response status code: {response.status_code}")
+    print(f"Response body: {response.json()}")
     assert response.status_code == 201
     assert response.json()['name'] == kit_body['name']
+
 
 def negative_assert_code_400(kit_body):
     auth_token = get_new_user_token()
@@ -39,3 +43,7 @@ def test_kit_body_no_param():
 
 def test_kit_body_different_type():
     negative_assert_code_400(KIT_BODY_DIFFERENT_TYPE)
+
+def test_kit_body_with_card_id():
+    positive_assert(KIT_BODY_WITH_CARD_ID)
+

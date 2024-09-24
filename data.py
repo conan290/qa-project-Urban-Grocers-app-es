@@ -11,3 +11,4 @@ KIT_BODY_SPACES = {"name": " A Aaa "}
 KIT_BODY_NUMBERS = {"name": "123"}
 KIT_BODY_NO_PARAM = {}
 KIT_BODY_DIFFERENT_TYPE = {"name": 123}
+KIT_BODY_WITH_CARD_ID = {"name": "Test Kit", "cardId": 1}
