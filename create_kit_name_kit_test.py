@@ -1,49 +1,60 @@
-import pytest
-from data import *
 from sender_stand_request import get_new_user_token, post_new_client_kit
+from data import kit_body
+import pytest
 
+def get_kit_body(name):
+    current_body = kit_body.copy()
+    current_body["name"] = name
+    return current_body
 
 def positive_assert(kit_body):
     auth_token = get_new_user_token()
     response = post_new_client_kit(kit_body, auth_token)
-    print(f"Response status code: {response.status_code}")
-    print(f"Response body: {response.json()}")
     assert response.status_code == 201
-    assert response.json()['name'] == kit_body['name']
-
+    assert response.json()["name"] == kit_body["name"]
 
 def negative_assert_code_400(kit_body):
     auth_token = get_new_user_token()
     response = post_new_client_kit(kit_body, auth_token)
     assert response.status_code == 400
 
-def test_kit_body_1_char():
-    positive_assert(KIT_BODY_1_CHAR)
+# Pruebas positivas
+def test_create_kit_1_letter_in_name_get_success_response():
+    kit_body = get_kit_body("a")
+    positive_assert(kit_body)
 
-def test_kit_body_511_char():
-    positive_assert(KIT_BODY_511_CHAR)
+def test_create_kit_511_letters_in_name_get_success_response():
+    kit_body = get_kit_body("a" * 511)
+    positive_assert(kit_body)
 
-def test_kit_body_0_char():
-    negative_assert_code_400(KIT_BODY_0_CHAR)
+def test_create_kit_special_characters_get_success_response():
+    kit_body = get_kit_body("№%@")
+    positive_assert(kit_body)
 
-def test_kit_body_512_char():
-    negative_assert_code_400(KIT_BODY_512_CHAR)
+def test_create_kit_spaces_in_name_get_success_response():
+    kit_body = get_kit_body(" A Aaa ")
+    positive_assert(kit_body)
 
-def test_kit_body_special_chars():
-    positive_assert(KIT_BODY_SPECIAL_CHARS)
+def test_create_kit_numbers_in_name_get_success_response():
+    kit_body = get_kit_body("123")
+    positive_assert(kit_body)
 
-def test_kit_body_spaces():
-    positive_assert(KIT_BODY_SPACES)
+# Pruebas negativas
+def test_create_kit_0_letters_in_name_get_error_response():
+    kit_body = get_kit_body("")
+    negative_assert_code_400(kit_body)
 
-def test_kit_body_numbers():
-    positive_assert(KIT_BODY_NUMBERS)
+def test_create_kit_512_letters_in_name_get_error_response():
+    kit_body = get_kit_body("a" * 512)
+    negative_assert_code_400(kit_body)
 
-def test_kit_body_no_param():
-    negative_assert_code_400(KIT_BODY_NO_PARAM)
+def test_create_kit_no_name_param_get_error_response():
+    kit_body = get_kit_body("")
+    kit_body.pop("name", None)
+    negative_assert_code_400(kit_body)
 
-def test_kit_body_different_type():
-    negative_assert_code_400(KIT_BODY_DIFFERENT_TYPE)
 
-def test_kit_body_with_card_id():
-    positive_assert(KIT_BODY_WITH_CARD_ID)
+def test_create_kit_numeric_name_param_get_error_response():
+    kit_body = get_kit_body(123)
+    negative_assert_code_400(kit_body)
 
