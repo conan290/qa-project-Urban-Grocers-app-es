@@ -1,25 +1,25 @@
-# Proyecto Urban Grocers
+# Urban Grocers Project
 
-Este proyecto contiene una serie de pruebas automatizadas diseñadas para validar la funcionalidad de una API que gestiona la creación de kits para usuarios. Las pruebas están implementadas utilizando Pytest y cubren varios casos de prueba, incluyendo tanto escenarios positivos como negativos.
+This project contains a series of automated tests designed to validate the functionality of an API that manages the creation of kits for users. The tests are implemented using Pytest and cover various test cases, including both positive and negative scenarios.
 
-## Estructura del Proyecto
+## Project Structure
 
-- **configuration.py**: Almacena las rutas y configuraciones necesarias para las pruebas.
-- **create_kit_name_kit_test.py**: Contiene las pruebas que validan la creación de kits utilizando diferentes configuraciones de cuerpo de solicitud.
-- **data.py**: Almacena los cuerpos de las solicitudes POST utilizados en las pruebas.
-- **sender_stand_request.py**: Define las funciones que envían solicitudes a la API, incluyendo la creación de nuevos usuarios y kits.
-- **README.md**: Este archivo, que proporciona una visión general del proyecto y su propósito.
+- **configuration.py**: Stores the routes and configurations required for the tests.
+- **create_kit_name_kit_test.py**: Contains the tests that validate the creation of kits using different request body configurations.
+- **data.py**: Stores the POST request bodies used in the tests.
+- **sender_stand_request.py**: Defines the functions that send requests to the API, including the creation of new users and kits.
+- **README.md**: This file provides an overview of the project and its purpose.
 
-## Requisitos
+## Requirements
 
 - Python 3.x
 - Pytest
 - Requests
 
-## Instalación
+## Installation
 
-1. Clona este repositorio en tu máquina local.
-2. Instala las dependencias necesarias ejecutando `pip install -r requirements.txt`.
-3. Ejecuta las pruebas con `pytest` para verificar la funcionalidad de la API.
+1. Clone this repository to your local machine.
+2. Install the necessary dependencies by running `pip install -r requirements.txt`.
+3. Run the tests with `pytest` to verify the API functionality.
 
 
